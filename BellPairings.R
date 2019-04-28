@@ -1,9 +1,9 @@
 require(gdata)
-set.seed(04242019)
+set.seed(042820192)
 
 
-active <- read.xls("/Users/amenarde/Dropbox/Penn/Around the Bell/inputs/active.xlsx", sheet = 1, header = FALSE)
-history <- read.xls("/Users/amenarde/Dropbox/Penn/Around the Bell/inputs/history.xlsx", sheet = 1, header = FALSE)
+active <- read.xls("path to /inputs-example/active.xlsx", sheet = 1, header = FALSE)
+history <- read.xls("path to /inputs-example/history.xlsx", sheet = 1, header = FALSE)
 
 active$V1 <- as.character(active$V1)
 history$V1 <- as.character(history$V1)
@@ -38,8 +38,9 @@ while(i > 1) {
       i <- i - 2
       
       cat(rownames(pairing.matrix)[1],
-          "and",
-          colnames(pairing.matrix)[allocation])
+          ",",
+          colnames(pairing.matrix)[allocation],
+          sep="")
       
       pairing.matrix <- pairing.matrix[rownames(pairing.matrix) != rownames(pairing.matrix)[allocation] & 
                                        rownames(pairing.matrix) != rownames(pairing.matrix)[1], 
@@ -55,3 +56,15 @@ if (i == 1) {
       "\n", "Please check that the last allocation is valid")
 }
 
+# note --------------------
+
+# At this point, the allocations must be copied from the output to the end of history.xlsx
+# in order to concrete them in the history
+
+# If there is a group of 3, the 3 piece-wise connections must be entered into history:
+# "Alice and Bob and Catherine" should become:
+# Alice, Bob
+# Alice, Catherine
+# Catherine, Bob
+
+#-------------------------
